@@ -1,0 +1,30 @@
+# Usage:
+#   conda build . -c defaults
+
+package:
+  name: glibc
+  version: 2.27
+
+source:
+  path: ../
+
+# ref: https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#build-section
+build:
+  number: 0
+  string: 0
+  script_env:
+    - CC
+    - CXX
+
+test:
+  commands:
+    # headers
+    # - test -f $PREFIX/include/
+
+    # shared
+    - test -f $PREFIX/lib/libm.so            # [linux]
+    
+    # absence of static libraries
+#    - test ! -f $PREFIX/lib/libm.a           # [unix]
+
+    # conda tools
